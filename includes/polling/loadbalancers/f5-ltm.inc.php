@@ -50,13 +50,15 @@ if (count($components > 0)) {
     $f5_stats['ltmVirtualServStatEntryPktsout'] = snmpwalk_array_num($device, '.1.3.6.1.4.1.3375.2.2.10.2.3.1.8', 0);
     $f5_stats['ltmVirtualServStatEntryBytesin'] = snmpwalk_array_num($device, '.1.3.6.1.4.1.3375.2.2.10.2.3.1.7', 0);
     $f5_stats['ltmVirtualServStatEntryBytesout'] = snmpwalk_array_num($device, '.1.3.6.1.4.1.3375.2.2.10.2.3.1.9', 0);
-    $f5_stats['ltmVirtualServStatEntryCurconns'] = snmpwalk_array_num($device, '.1.3.6.1.4.1.3375.2.2.10.2.3.1.11', 0);
+    $f5_stats['ltmVirtualServStatEntryTotconns'] = snmpwalk_array_num($device, '.1.3.6.1.4.1.3375.2.2.10.2.3.1.11', 0);
+    $f5_stats['ltmVirtualServStatEntryCurconns'] = snmpwalk_array_num($device, '.1.3.6.1.4.1.3375.2.2.10.2.3.1.12', 0);
 
     $f5_stats['ltmPoolMemberStatEntryPktsin'] = snmpwalk_array_num($device, '.1.3.6.1.4.1.3375.2.2.5.4.3.1.5', 0);
     $f5_stats['ltmPoolMemberStatEntryPktsout'] = snmpwalk_array_num($device, '.1.3.6.1.4.1.3375.2.2.5.4.3.1.7', 0);
     $f5_stats['ltmPoolMemberStatEntryBytesin'] = snmpwalk_array_num($device, '.1.3.6.1.4.1.3375.2.2.5.4.3.1.6', 0);
     $f5_stats['ltmPoolMemberStatEntryBytesout'] = snmpwalk_array_num($device, '.1.3.6.1.4.1.3375.2.2.5.4.3.1.8', 0);
-    $f5_stats['ltmPoolMemberStatEntryCurconns'] = snmpwalk_array_num($device, '.1.3.6.1.4.1.3375.2.2.5.4.3.1.10', 0);
+    $f5_stats['ltmPoolMemberStatEntryTotconns'] = snmpwalk_array_num($device, '.1.3.6.1.4.1.3375.2.2.5.4.3.1.10', 0);
+    $f5_stats['ltmPoolMemberStatEntryCurconns'] = snmpwalk_array_num($device, '.1.3.6.1.4.1.3375.2.2.5.4.3.1.11', 0);
 
     // and check the status
     $f5_stats['ltmVsStatusEntryState'] = snmpwalk_array_num($device, '1.3.6.1.4.1.3375.2.2.10.13.2.1.2', 0);
@@ -85,14 +87,14 @@ if (count($components > 0)) {
                 ->addDataset('pktsout', 'COUNTER', 0)
                 ->addDataset('bytesin', 'COUNTER', 0)
                 ->addDataset('bytesout', 'COUNTER', 0)
-                ->addDataset('curconns', 'COUNTER', 0);
+                ->addDataset('totconns', 'COUNTER', 0);
 
             $fields = array(
                 'pktsin' => $f5_stats['ltmVirtualServStatEntryPktsin']['1.3.6.1.4.1.3375.2.2.10.2.3.1.6.'.$UID],
                 'pktsout' => $f5_stats['ltmVirtualServStatEntryPktsout']['1.3.6.1.4.1.3375.2.2.10.2.3.1.8.'.$UID],
                 'bytesin' => $f5_stats['ltmVirtualServStatEntryBytesin']['1.3.6.1.4.1.3375.2.2.10.2.3.1.7.'.$UID],
                 'bytesout' => $f5_stats['ltmVirtualServStatEntryBytesout']['1.3.6.1.4.1.3375.2.2.10.2.3.1.9.'.$UID],
-                'curconns' => $f5_stats['ltmVirtualServStatEntryCurconns']['1.3.6.1.4.1.3375.2.2.10.2.3.1.11.'.$UID],
+                'totconns' => $f5_stats['ltmVirtualServStatEntryTotconns']['1.3.6.1.4.1.3375.2.2.10.2.3.1.11.'.$UID],
             );
 
             // Let's print some debugging info.
@@ -147,7 +149,7 @@ if (count($components > 0)) {
                 ->addDataset('pktsout', 'COUNTER', 0)
                 ->addDataset('bytesin', 'COUNTER', 0)
                 ->addDataset('bytesout', 'COUNTER', 0)
-                ->addDataset('curconns', 'COUNTER', 0);
+                ->addDataset('totconns', 'COUNTER', 0);
 
             $array['state'] = $f5_stats['ltmPoolMbrStatusEntryState']['1.3.6.1.4.1.3375.2.2.5.6.2.1.5.'.$UID];
             $array['available'] = $f5_stats['ltmPoolMbrStatusEntryAvail']['1.3.6.1.4.1.3375.2.2.5.6.2.1.6.'.$UID];
@@ -157,7 +159,7 @@ if (count($components > 0)) {
                 'pktsout' => $f5_stats['ltmPoolMemberStatEntryPktsout']['1.3.6.1.4.1.3375.2.2.5.4.3.1.7.'.$UID],
                 'bytesin' => $f5_stats['ltmPoolMemberStatEntryBytesin']['1.3.6.1.4.1.3375.2.2.5.4.3.1.6.'.$UID],
                 'bytesout' => $f5_stats['ltmPoolMemberStatEntryBytesout']['1.3.6.1.4.1.3375.2.2.5.4.3.1.8.'.$UID],
-                'curconns' => $f5_stats['ltmPoolMemberStatEntryCurconns']['1.3.6.1.4.1.3375.2.2.5.4.3.1.10.'.$UID],
+                'totalconns' => $f5_stats['ltmPoolMemberStatEntryTotconns']['1.3.6.1.4.1.3375.2.2.5.4.3.1.10.'.$UID],
             );
 
             // Let's print some debugging info.
@@ -176,6 +178,50 @@ if (count($components > 0)) {
                 $array['status'] = 0;
                 $array['error'] = '';
             }
+        } else {
+            d_echo("Type is unknown: ".$type."\n");
+            continue;
+        }
+
+        $tags = compact('rrd_name', 'rrd_def', 'type', 'hash', 'label');
+        data_update($device, $type, $tags, $fields);
+    } // End foreach components
+
+    //Loop through to create concurrent connections RRD
+    foreach ($components as $key => &$array) {
+        $type = $array['type'];
+        $UID = $array['UID'];
+        $label = $array['label'];
+        $hash = $array['hash'];
+        $curconntag = 'curconns';
+        $rrd_name = array($type, $curconntag, $label, $hash);
+
+        if ($type == 'f5-ltm-vs') {
+            $rrd_def = RrdDefinition::make()
+                ->addDataset('curconns', 'GAUGE', 0);
+
+            $fields = array(
+                'curconns' => $f5_stats['ltmVirtualServStatEntryCurconns']['1.3.6.1.4.1.3375.2.2.10.2.3.1.12.'.$UID],
+            );
+
+            // Let's print some debugging info.
+            d_echo("\n\nComponent: ".$key."\n");
+            d_echo("    Type: ".$type."\n");
+            d_echo("    Label: ".$label."\n");
+
+        } elseif ($type == 'f5-ltm-poolmember') {
+            $rrd_def = RrdDefinition::make()
+                ->addDataset('curconns', 'GAUGE', 0);
+
+            $fields = array(
+                'curconns' => $f5_stats['ltmPoolMemberStatEntryCurconns']['1.3.6.1.4.1.3375.2.2.5.4.3.1.11.'.$UID],
+            );
+
+            // Let's print some debugging info.
+            d_echo("\n\nComponent: ".$key."\n");
+            d_echo("    Type: ".$type."\n");
+            d_echo("    Label: ".$label."\n");
+
         } else {
             d_echo("Type is unknown: ".$type."\n");
             continue;
