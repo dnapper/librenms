@@ -132,8 +132,9 @@ if ($components[$vars['poolid']]['type'] == 'f5-ltm-pool') {
                             require 'includes/print-graphrow.inc.php';
                             ?>
                         </div>
-                    </div>                    
-                        <div class="panel-heading">
+                    </div>
+                    <div class="panel panel-default" id="connectionsps">                    
+                    <div class="panel-heading">
                             <h3 class="panel-title">New Connection Per Second</h3>
                         </div>
                         <div class="panel-body">
