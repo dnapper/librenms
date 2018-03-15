@@ -116,8 +116,25 @@ if ($components[$vars['poolid']]['type'] == 'f5-ltm-pool') {
             <div class="container-fluid">
                 <div class='row'>
                     <div class="panel panel-default" id="connections">
-                        <div class="panel-heading">
+                    <div class="panel-heading">
                             <h3 class="panel-title">Connections</h3>
+                        </div>
+                        <div class="panel-body">
+                            <?php
+                            $graph_array = array ();
+                            $graph_array['device'] = $device['device_id'];
+                            $graph_array['height'] = '100';
+                            $graph_array['width'] = '215';
+                            $graph_array['legend'] = 'no';
+                            $graph_array['to'] = $config['time']['now'];
+                            $graph_array['type'] = 'device_bigip_ltm_allpm_curconns';
+                            $graph_array['id'] = $vars['poolid'];
+                            require 'includes/print-graphrow.inc.php';
+                            ?>
+                        </div>
+                    </div>                    
+                        <div class="panel-heading">
+                            <h3 class="panel-title">New Connection Per Second</h3>
                         </div>
                         <div class="panel-body">
                             <?php
