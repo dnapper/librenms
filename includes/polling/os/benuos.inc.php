@@ -1,5 +1,7 @@
 <?php
 
+use LibreNMS\RRD\RrdDefinition;
+
 preg_match('/BenuOS\, (.*)\n.Product\:(.*)\n.*\n.*\n Chassis Type \:(.*)/', $device['sysDescr'], $matches);
 
 $version  = $matches['1'];
@@ -8,33 +10,34 @@ $hardware = $matches['3'];
 
 $serial = snmp_get($device, 'benuChassisId.0', '-Ovqs', 'BENU-CHASSIS-MIB');
 
-$oids = array(
-    '.1.3.6.1.4.1.39406.2.1.4.3.2.1.6.1.1',
-    '.1.3.6.1.4.1.39406.2.1.4.3.2.1.7.1.1',
-    '.1.3.6.1.4.1.39406.2.1.4.3.2.1.8.1.1',
-    '.1.3.6.1.4.1.39406.2.1.4.3.2.1.9.1.1',
-    '.1.3.6.1.4.1.39406.2.1.4.3.2.1.10.1.1',
-    '.1.3.6.1.4.1.39406.2.1.4.3.2.1.11.1.1',
-    '.1.3.6.1.4.1.39406.2.1.4.3.2.1.12.1.1',
-    '.1.3.6.1.4.1.39406.2.1.4.3.2.1.13.1.1',
-    '.1.3.6.1.4.1.39406.2.1.4.3.2.1.14.1.1',
-    '.1.3.6.1.4.1.39406.2.1.4.3.2.1.15.1.1',
+$radiusproxyoids = array(
+        'bRadiusProxyAcctRequestRcvd.1.1',
+        'bRadiusProxyAcctRequestSent.1.1',
+        'bRadiusProxyAcctStartRequestRcvd.1.1',
+        'bRadiusProxyAcctStopRequestRcvd.1.1',
+        'bRadiusProxyAcctInterimUpdateRcvd.1.1',
+        'bRadiusProxyAcctStartRequestSent.1.1',
+        'bRadiusProxyAcctStopRequestSent.1.1',
+        'bRadiusProxyAcctInterimUpdateSent.2.1',
+        'bRadiusProxyAcctResponseRcvd.1.1',
+        'bRadiusProxyAcctResponseSent.1.1',
 );
 
-$radiusacct_data = snmp_get_multi_oid($device, $oids);
-list ($requestrcvd, $requestsent, $startrequestrcvd, $stoprequestrcvd, $interimupdatercvd, $startrequestsent, $stoprequestsent, $interimupdatesent, $responsercvd, $responsesent) = array_values($radiusacct_data);
+$radiusacct_data = snmp_get_multi_oid($device, $radiusproxyoids, '-OUQs', 'BENU-RADIUS-MIB');
 
-$rrd_def = RrdDefinition::make()
-    ->addDataset('RequestRcvd', 'GAUGE', 0, 10000000);
-    ->addDataset('RequestSent', 'GAUGE', 0, 10000000);
+foreach ($radiusacct_data as $key=>$value) {
+  $name = preg_replace('~[1-9\s:\s.]+$~', '', $key);
+  $graphname = preg_replace('/^bRadiusProxyAcct/', "benuos_radius_", $name);
+  d_echo("$graphname $name $value\n");
+  $rrd_name = array($name);
+  $rrd_def = RrdDefinition::make()->addDataset('radius', 'GAUGE', 0, 1000000);
 
-$fields = array(
-    'RequestRcvd'  => $requestrcvd,
-    'RequestSent'  => $requestsent,
-);
+  $fields = array(
+      'radius'  => $value,
+  );
 
-$tags = compact('rrd_def');
-data_update($device, 'benuos_RadiusProxy', $tags, $fields);
-
-
-$graphs['benuos_RadiusProxy'] = true;
+  $tags = compact('rrd_name', 'rrd_def');
+  data_update($device, $name, $tags, $fields);
+  
+  $graphs[$graphname] = true;
+}

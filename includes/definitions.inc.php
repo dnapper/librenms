@@ -548,6 +548,38 @@ $config['graph_types']['device']['arbos_flows']['section']         = 'graphs';
 $config['graph_types']['device']['arbos_flows']['order']           = '0';
 $config['graph_types']['device']['arbos_flows']['descr']           = 'Accumulative flow count per SP device';
 
+//benuos specific graphs
+$config['graph_types']['device']['benuos_radius_RequestRcvd']['section'] = 'graphs';
+$config['graph_types']['device']['benuos_radius_RequestRcvd']['order']   = '0';
+$config['graph_types']['device']['benuos_radius_RequestRcvd']['descr']   = 'Radius Proxy Requests Received';
+$config['graph_types']['device']['benuos_radius_RequestSent']['section'] = 'graphs';
+$config['graph_types']['device']['benuos_radius_RequestSent']['order']   = '1';
+$config['graph_types']['device']['benuos_radius_RequestSent']['descr']   = 'Radius Proxy Requests Sent';
+$config['graph_types']['device']['benuos_radius_StartRequestRcvd']['section'] = 'graphs';
+$config['graph_types']['device']['benuos_radius_StartRequestRcvd']['order']   = '2';
+$config['graph_types']['device']['benuos_radius_StartRequestRcvd']['descr']   = 'Radius Proxy Start Requests Received';
+$config['graph_types']['device']['benuos_radius_StopRequestRcvd']['section'] = 'graphs';
+$config['graph_types']['device']['benuos_radius_StopRequestRcvd']['order']   = '3';
+$config['graph_types']['device']['benuos_radius_StopRequestRcvd']['descr']   = 'Radius Proxy Stop Requests Received';
+$config['graph_types']['device']['benuos_radius_StartRequestSent']['section'] = 'graphs';
+$config['graph_types']['device']['benuos_radius_StartRequestSent']['order']   = '4';
+$config['graph_types']['device']['benuos_radius_StartRequestSent']['descr']   = 'Radius Proxy Start Requests Sent';
+$config['graph_types']['device']['benuos_radius_StopRequestSent']['section'] = 'graphs';
+$config['graph_types']['device']['benuos_radius_StopRequestSent']['order']   = '5';
+$config['graph_types']['device']['benuos_radius_StopRequestSent']['descr']   = 'Radius Proxy Stop Requests Sent';
+$config['graph_types']['device']['benuos_radius_InterimUpdateRcvd']['section'] = 'graphs';
+$config['graph_types']['device']['benuos_radius_InterimUpdateRcvd']['order']   = '6';
+$config['graph_types']['device']['benuos_radius_InterimUpdateRcvd']['descr']   = 'Radius Proxy Interim Update Received';
+$config['graph_types']['device']['benuos_radius_InterimUpdateSent']['section'] = 'graphs';
+$config['graph_types']['device']['benuos_radius_InterimUpdateSent']['order']   = '7';
+$config['graph_types']['device']['benuos_radius_InterimUpdateSent']['descr']   = 'Radius Proxy Interim Update Sent';
+$config['graph_types']['device']['benuos_radius_ResponseRcvd']['section'] = 'graphs';
+$config['graph_types']['device']['benuos_radius_ResponseRcvd']['order']   = '8';
+$config['graph_types']['device']['benuos_radius_ResponseRcvd']['descr']   = 'Radius Proxy Response Received';
+$config['graph_types']['device']['benuos_radius_ResponseSent']['section'] = 'graphs';
+$config['graph_types']['device']['benuos_radius_ResponseSent']['order']   = '9';
+$config['graph_types']['device']['benuos_radius_ResponseSent']['descr']   = 'Radius Proxy Response Sent';
+
 // Device Types
 $i = 0;
 $config['device_types'][$i]['text'] = 'Servers';
