@@ -11,16 +11,16 @@ $hardware = $matches['3'];
 $serial = snmp_get($device, 'benuChassisId.0', '-Ovqs', 'BENU-CHASSIS-MIB');
 
 $radiusproxyoids = array(
-        'bRadiusProxyAcctRequestRcvd.1.1',
-        'bRadiusProxyAcctRequestSent.1.1',
-        'bRadiusProxyAcctStartRequestRcvd.1.1',
-        'bRadiusProxyAcctStopRequestRcvd.1.1',
-        'bRadiusProxyAcctInterimUpdateRcvd.1.1',
-        'bRadiusProxyAcctStartRequestSent.1.1',
-        'bRadiusProxyAcctStopRequestSent.1.1',
-        'bRadiusProxyAcctInterimUpdateSent.2.1',
-        'bRadiusProxyAcctResponseRcvd.1.1',
-        'bRadiusProxyAcctResponseSent.1.1',
+        'bRadiusProxyAcctRequestRcvd.1.2',
+        'bRadiusProxyAcctRequestSent.1.2',
+        'bRadiusProxyAcctStartRequestRcvd.1.2',
+        'bRadiusProxyAcctStopRequestRcvd.1.2',
+        'bRadiusProxyAcctInterimUpdateRcvd.1.2',
+        'bRadiusProxyAcctStartRequestSent.1.2',
+        'bRadiusProxyAcctStopRequestSent.1.2',
+        'bRadiusProxyAcctInterimUpdateSent.2.2',
+        'bRadiusProxyAcctResponseRcvd.1.2',
+        'bRadiusProxyAcctResponseSent.1.2',
 );
 
 $radiusacct_data = snmp_get_multi_oid($device, $radiusproxyoids, '-OUQs', 'BENU-RADIUS-MIB');
